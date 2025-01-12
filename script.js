@@ -1,3 +1,6 @@
+// Массив студентов, который будем хранить в LocalStorage
+let students = [];
+
 // Функция для добавления студента в таблицу
 function addStudentToTable(student) {
     const studentsList = document.getElementById('students-list');
@@ -5,10 +8,8 @@ function addStudentToTable(student) {
     row.setAttribute('data-id', student.id);
 
     row.innerHTML = `
-        <td>${student.firstName} ${student.lastName}</td>
-        <td>${student.age}</td>
-        <td>${student.height} см</td>
-        <td>${student.weight} кг</td>
+        <td>${student.firstName}</td>
+        <td>${student.lastName}</td>
         <td>${student.payment} ₽</td>
         <td>
             <button class="edit-btn" onclick="editStudent(${student.id})">Редактировать</button>
@@ -25,28 +26,22 @@ document.getElementById('add-student-form').addEventListener('submit', function(
     
     const firstName = document.getElementById('first-name').value;
     const lastName = document.getElementById('last-name').value;
-    const age = document.getElementById('age').value;
-    const height = document.getElementById('height').value;
-    const weight = document.getElementById('weight').value;
     const payment = document.getElementById('payment').value;
 
-    // Генерируем уникальный ID для студента
-    const studentId = Date.now(); // Используем timestamp как уникальный ID
+    // Генерация уникального ID для студента
+    const studentId = Date.now();
 
     const student = {
         id: studentId,
         firstName,
         lastName,
-        age,
-        height,
-        weight,
         payment
     };
 
     // Добавляем студента в массив
     students.push(student);
 
-    // Сохраняем массив студентов в LocalStorage
+    // Сохраняем данные в LocalStorage
     localStorage.setItem('students', JSON.stringify(students));
 
     // Обновляем таблицу
@@ -63,9 +58,6 @@ function editStudent(id) {
     // Заполняем форму редактирования
     document.getElementById('first-name').value = student.firstName;
     document.getElementById('last-name').value = student.lastName;
-    document.getElementById('age').value = student.age;
-    document.getElementById('height').value = student.height;
-    document.getElementById('weight').value = student.weight;
     document.getElementById('payment').value = student.payment;
 
     // Удаляем студента из массива
@@ -97,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const storedStudents = localStorage.getItem('students');
     
     if (storedStudents) {
-        students = JSON.parse(storedStudents);
+        students = JSON.parse(storedStudents); // Преобразуем строку в массив объектов
         students.forEach(student => {
             addStudentToTable(student);
         });
