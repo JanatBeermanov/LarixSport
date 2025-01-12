@@ -1,69 +1,59 @@
-/* Стили для таблицы */
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-th, td {
-    border: 1px solid #ccc;
-    padding: 8px;
-    text-align: center;
-}
-
-th {
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
     background-color: #f4f4f4;
 }
 
-/* Стили для формы добавления студента */
-form {
-    max-width: 500px;
-    margin: 20px 0;
+h1 {
+    text-align: center;
 }
 
-form label {
-    display: block;
-    margin-bottom: 5px;
+form {
+    margin-bottom: 20px;
+    text-align: center;
 }
 
 form input {
-    width: 100%;
+    margin: 5px;
     padding: 8px;
-    margin-bottom: 10px;
+    font-size: 16px;
 }
 
 form button {
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
+    padding: 8px 16px;
+    font-size: 16px;
     cursor: pointer;
 }
 
-form button:hover {
-    background-color: #45a049;
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    text-align: left;
 }
 
-/* Стиль для кнопки редактирования и удаления */
-button.edit-btn, button.delete-btn {
+table th, table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+}
+
+table th {
+    background-color: #f2f2f2;
+}
+
+button {
     padding: 5px 10px;
-    margin: 5px;
     cursor: pointer;
 }
 
 button.edit-btn {
-    background-color: #f0ad4e;
+    background-color: #4CAF50;
     color: white;
 }
 
 button.delete-btn {
-    background-color: #d9534f;
+    background-color: #f44336;
     color: white;
 }
 
-button.edit-btn:hover {
-    background-color: #ec971f;
-}
-
-button.delete-btn:hover {
-    background-color: #c9302c;
-}
