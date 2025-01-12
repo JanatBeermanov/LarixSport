@@ -1,163 +1,97 @@
-<script>
-  // Обработчик отправки формы
-  document.getElementById('add-student-form').addEventListener('submit', function(e) {
-    e.preventDefault(); // Отменяем стандартное поведение формы (перезагрузка страницы)
+// Массив для хранения данных студентов
+let students = [];
 
-    // Получаем данные из полей формы
-    const name = document.getElementById('name').value;
-    const age = document.getElementById('age').value;
-    const height = document.getElementById('height').value;
-    const weight = document.getElementById('weight').value;
-    const tournamentResults = document.getElementById('tournament-results').value;
-    const avatar = document.getElementById('avatar').value;
+// Функция для добавления студента в таблицу
+function addStudentToTable(student) {
+    const studentsList = document.getElementById('students-list');
+    const row = document.createElement('tr');
 
-    // Создаем новую карточку студента
-    const studentCard = document.createElement('div');
-    studentCard.classList.add('card');
-    
-    // Создаем элемент изображения
-    const studentImage = document.createElement('img');
-    studentImage.src = avatar || 'https://via.placeholder.com/250';  // Если фото не указано, используем стандартное изображение
-    studentImage.alt = 'Avatar';
-    studentImage.classList.add('avatar');
-    
-    // Создаем элемент с информацией о студенте
-    const studentContent = document.createElement('div');
-    studentContent.classList.add('card-content');
-    
-    studentContent.innerHTML = `
-      <h3>${name}</h3>
-      <p><strong>Возраст:</strong> ${age} лет</p>
-      <p><strong>Рост:</strong> ${height} см</p>
-      <p><strong>Вес:</strong> ${weight} кг</p>
-      <p><strong>Результаты турниров:</strong> ${tournamentResults}</p>
+    row.innerHTML = `
+        <td>${student.firstName} ${student.lastName}</td>
+        <td>${student.age}</td>
+        <td>${student.height} см</td>
+        <td>${student.weight} кг</td>
+        <td>${student.payment} ₽</td>
+        <td>
+            <button class="edit-btn" onclick="editStudent(${student.id})">Редактировать</button>
+            <button class="delete-btn" onclick="deleteStudent(${student.id})">Удалить</button>
+        </td>
     `;
-    
-    // Добавляем изображение и содержимое в карточку
-    studentCard.appendChild(studentImage);
-    studentCard.appendChild(studentContent);
-    
-    // Добавляем карточку на страницу
-    document.body.appendChild(studentCard);
-    
-    // Очищаем поля формы
-    document.getElementById('add-student-form').reset();
-  });
-</script>
 
-// Функция для сортировки студентов
-function sortStudents(attribute) {
-  const studentsList = document.getElementById('students-list');
-  const students = Array.from(studentsList.getElementsByClassName('card'));
-  
-  students.sort((a, b) => {
-    const aValue = a.querySelector(`.${attribute}`).textContent;
-    const bValue = b.querySelector(`.${attribute}`).textContent;
-    return aValue.localeCompare(bValue);
-  });
-
-  students.forEach(student => {
-    studentsList.appendChild(student); // Перемещаем элементы в отсортированном порядке
-  });
+    studentsList.appendChild(row);
 }
 
-// Слушатели событий для кнопок сортировки
-document.getElementById('sort-name').addEventListener('click', () => sortStudents('name'));
-document.getElementById('sort-age').addEventListener('click', () => sortStudents('age'));
-document.getElementById('sort-height').addEventListener('click', () => sortStudents('height'));
-
-document.getElementById('filter-input').addEventListener('input', function() {
-  const filterValue = this.value.toLowerCase();
-  const studentsList = document.getElementById('students-list');
-  const students = studentsList.getElementsByClassName('card');
-  
-  Array.from(students).forEach(student => {
-    const name = student.querySelector('.name').textContent.toLowerCase();
-    const age = student.querySelector('.age').textContent.toLowerCase();
-    
-    if (name.includes(filterValue) || age.includes(filterValue)) {
-      student.style.display = 'block'; // Показываем студент
-    } else {
-      student.style.display = 'none'; // Скрываем студент
-    }
-  });
-});
-
+// Функция для добавления нового студента через форму
 document.getElementById('add-student-form').addEventListener('submit', function(e) {
-  e.preventDefault();
-  const name = document.getElementById('name').value;
-  const age = document.getElementById('age').value;
-  const height = document.getElementById('height').value;
-  const weight = document.getElementById('weight').value;
-  
-  const studentCard = document.createElement('div');
-  studentCard.classList.add('card');
-  
-  studentCard.innerHTML = `
-    <div class="card-content">
-      <h3 class="name">${name}</h3>
-      <p class="age">Возраст: ${age} лет</p>
-      <p class="height">Рост: ${height} см</p>
-      <p class="weight">Вес: ${weight} кг</p>
-      <button class="edit-btn">Редактировать</button>
-    </div>
-  `;
-
-  // Кнопка редактирования
-  const editButton = studentCard.querySelector('.edit-btn');
-  editButton.addEventListener('click', () => {
-    document.getElementById('name').value = name;
-    document.getElementById('age').value = age;
-    document.getElementById('height').value = height;
-    document.getElementById('weight').value = weight;
-  });
-
-  document.getElementById('students-list').appendChild(studentCard);
-});
-
-<script>
-  // Обработчик отправки формы
-  document.getElementById('add-student-form').addEventListener('submit', function(e) {
-    e.preventDefault(); // Отменяем стандартное поведение формы (перезагрузка страницы)
-
-    // Получаем данные из полей формы
-    const name = document.getElementById('name').value;
+    e.preventDefault();
+    
+    const firstName = document.getElementById('first-name').value;
+    const lastName = document.getElementById('last-name').value;
     const age = document.getElementById('age').value;
     const height = document.getElementById('height').value;
     const weight = document.getElementById('weight').value;
-    const tournamentResults = document.getElementById('tournament-results').value;
-    const avatar = document.getElementById('avatar').value;
+    const payment = document.getElementById('payment').value;
 
-    // Создаем новую карточку студента
-    const studentCard = document.createElement('div');
-    studentCard.classList.add('card');
-    
-    // Создаем элемент изображения
-    const studentImage = document.createElement('img');
-    studentImage.src = avatar || 'https://via.placeholder.com/250';  // Если фото не указано, используем стандартное изображение
-    studentImage.alt = 'Avatar';
-    studentImage.classList.add('avatar');
-    
-    // Создаем элемент с информацией о студенте
-    const studentContent = document.createElement('div');
-    studentContent.classList.add('card-content');
-    
-    studentContent.innerHTML = `
-      <h3>${name}</h3>
-      <p><strong>Возраст:</strong> ${age} лет</p>
-      <p><strong>Рост:</strong> ${height} см</p>
-      <p><strong>Вес:</strong> ${weight} кг</p>
-      <p><strong>Результаты турниров:</strong> ${tournamentResults}</p>
-    `;
-    
-    // Добавляем изображение и содержимое в карточку
-    studentCard.appendChild(studentImage);
-    studentCard.appendChild(studentContent);
-    
-    // Добавляем карточку на страницу
-    document.getElementById('students-list').appendChild(studentCard);
-    
-    // Очищаем поля формы
+    // Генерируем уникальный ID для студента
+    const studentId = students.length + 1;
+
+    const student = {
+        id: studentId,
+        firstName,
+        lastName,
+        age,
+        height,
+        weight,
+        payment
+    };
+
+    // Добавляем студента в массив
+    students.push(student);
+
+    // Обновляем таблицу
+    addStudentToTable(student);
+
+    // Очищаем форму
     document.getElementById('add-student-form').reset();
-  });
-</script>
+});
+
+// Функция для редактирования данных студента
+function editStudent(id) {
+    const student = students.find(student => student.id === id);
+
+    // Заполняем форму редактирования
+    document.getElementById('first-name').value = student.firstName;
+    document.getElementById('last-name').value = student.lastName;
+    document.getElementById('age').value = student.age;
+    document.getElementById('height').value = student.height;
+    document.getElementById('weight').value = student.weight;
+    document.getElementById('payment').value = student.payment;
+
+    // Удаляем студента из массива
+    students = students.filter(student => student.id !== id);
+
+    // Удаляем строку из таблицы
+    const row = document.querySelector(`tr[data-id="${id}"]`);
+    row.remove();
+}
+
+// Функция для удаления студента
+function deleteStudent(id) {
+    // Удаляем студента из массива
+    students = students.filter(student => student.id !== id);
+
+    // Удаляем строку из таблицы
+    const row = document.querySelector(`tr[data-id="${id}"]`);
+    row.remove();
+}
+
+// Включаем форму добавления студентов только для администраторов
+function enableAdminAccess(isAdmin) {
+    const adminForm = document.getElementById('admin-form');
+    if (isAdmin) {
+        adminForm.style.display = 'block'; // Показываем форму
+    }
+}
+
+// Включаем доступ администратора (для теста включим доступ по умолчанию)
+enableAdminAccess(true);
