@@ -65,3 +65,20 @@ function sortStudents(attribute) {
 document.getElementById('sort-name').addEventListener('click', () => sortStudents('name'));
 document.getElementById('sort-age').addEventListener('click', () => sortStudents('age'));
 document.getElementById('sort-height').addEventListener('click', () => sortStudents('height'));
+
+document.getElementById('filter-input').addEventListener('input', function() {
+  const filterValue = this.value.toLowerCase();
+  const studentsList = document.getElementById('students-list');
+  const students = studentsList.getElementsByClassName('card');
+  
+  Array.from(students).forEach(student => {
+    const name = student.querySelector('.name').textContent.toLowerCase();
+    const age = student.querySelector('.age').textContent.toLowerCase();
+    
+    if (name.includes(filterValue) || age.includes(filterValue)) {
+      student.style.display = 'block'; // Показываем студент
+    } else {
+      student.style.display = 'none'; // Скрываем студент
+    }
+  });
+});
