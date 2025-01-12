@@ -3,47 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Таблица студентов</title>
+    <title>Список студентов</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <h1>Таблица студентов</h1>
+    <h1>Список студентов</h1>
 
-    <!-- Форма для добавления нового студента (доступна только администратору) -->
-    <div id="admin-form" style="display: none;">
-        <h2>Добавить студента</h2>
-        <form id="add-student-form">
-            <label for="first-name">Имя</label>
-            <input type="text" id="first-name" name="first-name" required>
-            
-            <label for="last-name">Фамилия</label>
-            <input type="text" id="last-name" name="last-name" required>
-            
-            <label for="age">Возраст</label>
-            <input type="number" id="age" name="age" required>
-            
-            <label for="height">Рост</label>
-            <input type="number" id="height" name="height" required>
-            
-            <label for="weight">Вес</label>
-            <input type="number" id="weight" name="weight" required>
-            
-            <label for="payment">Оплата по месяцам</label>
-            <input type="number" id="payment" name="payment" required>
+    <!-- Форма для добавления студента -->
+    <form id="add-student-form">
+        <input type="text" id="first-name" placeholder="Имя" required>
+        <input type="text" id="last-name" placeholder="Фамилия" required>
+        <input type="number" id="payment" placeholder="Оплата по месяцам" required>
+        <button type="submit">Добавить студента</button>
+    </form>
 
-            <button type="submit">Добавить студента</button>
-        </form>
-    </div>
-
-    <!-- Таблица с данными студентов -->
+    <!-- Таблица студентов -->
     <table id="students-table">
         <thead>
             <tr>
                 <th>Имя</th>
-                <th>Возраст</th>
-                <th>Рост</th>
-                <th>Вес</th>
+                <th>Фамилия</th>
                 <th>Оплата по месяцам</th>
                 <th>Действия</th>
             </tr>
