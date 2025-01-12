@@ -1,83 +1,58 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Студенты</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Таблица студентов</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-   <h1>Профили студентов</h1>
 
-<!-- Карточка 1 -->
-<div class="card">
-  <img src="ebe29379-b3e8-4048-a562-3931bc82ded4.jpg" alt="Avatar" class="avatar">
-  <div class="card-content">
-    <h3>Бээрманов Дастан</h3>
-    <p><strong>Возраст:</strong> 12 лет</p>
-    <p><strong>Рост:</strong> 160 см</p>
-    <p><strong>Вес:</strong> 40 кг</p>
-    <p><strong>Результаты турниров:</strong> 1 место</p>
-  </div>
-</div>
+    <h1>Таблица студентов</h1>
 
-<!-- Карточка 2 -->
-<div class="card">
-  <img src="a8c74d81-8405-4828-99ac-3b7aa5e55aeb.jpg" alt="Avatar" class="avatar">
-  <div class="card-content">
-    <h3>Бээрманова Мээржан</h3>
-    <p><strong>Возраст:</strong> 9 лет</p>
-    <p><strong>Рост:</strong> 140 см</p>
-    <p><strong>Вес:</strong> 20 кг</p>
-    <p><strong>Результаты турниров:</strong> 2 место</p>
-  </div>
-</div>
+    <!-- Форма для добавления нового студента (доступна только администратору) -->
+    <div id="admin-form" style="display: none;">
+        <h2>Добавить студента</h2>
+        <form id="add-student-form">
+            <label for="first-name">Имя</label>
+            <input type="text" id="first-name" name="first-name" required>
+            
+            <label for="last-name">Фамилия</label>
+            <input type="text" id="last-name" name="last-name" required>
+            
+            <label for="age">Возраст</label>
+            <input type="number" id="age" name="age" required>
+            
+            <label for="height">Рост</label>
+            <input type="number" id="height" name="height" required>
+            
+            <label for="weight">Вес</label>
+            <input type="number" id="weight" name="weight" required>
+            
+            <label for="payment">Оплата по месяцам</label>
+            <input type="number" id="payment" name="payment" required>
 
-<h2>Добавить нового студента</h2>
-<form id="add-student-form">
-  <label for="name">Имя:</label>
-  <input type="text" id="name" name="name" required><br><br>
-  
-  <label for="age">Возраст:</label>
-  <input type="number" id="age" name="age" required><br><br>
-  
-  <label for="height">Рост:</label>
-  <input type="number" id="height" name="height" required><br><br>
-  
-  <label for="weight">Вес:</label>
-  <input type="number" id="weight" name="weight" required><br><br>
-  
-  <label for="tournament-results">Результаты турниров:</label>
-  <input type="text" id="tournament-results" name="tournament-results" required><br><br>
+            <button type="submit">Добавить студента</button>
+        </form>
+    </div>
 
-  <label for="avatar">Фото:</label>
-  <input type="url" id="avatar" name="avatar" placeholder="URL изображения"><br><br>
+    <!-- Таблица с данными студентов -->
+    <table id="students-table">
+        <thead>
+            <tr>
+                <th>Имя</th>
+                <th>Возраст</th>
+                <th>Рост</th>
+                <th>Вес</th>
+                <th>Оплата по месяцам</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody id="students-list">
+            <!-- Студенты будут добавляться сюда -->
+        </tbody>
+    </table>
 
-  <button type="submit">Добавить студента</button>
-</form>
-  
-
-  <script src="script.js"></script>
-<body>
-  
-<button id="sort-name">Сортировать по имени</button>
-<button id="sort-age">Сортировать по возрасту</button>
-<button id="sort-height">Сортировать по росту</button>
-
-  <div class="card" data-name="John Doe" data-age="25" data-height="180">
-  <div class="card-content">
-    <h3 class="name">John Doe</h3>
-    <p class="age">Возраст: 25 лет</p>
-    <p class="height">Рост: 180 см</p>
-  </div>
-</div>
-
-<input type="text" id="filter-input" placeholder="Введите имя или возраст для фильтрации">
-
-  <button class="edit-btn">Редактировать</button>
-
- <div id="students-list">
-  <!-- Карточки студентов будут добавляться сюда -->
-</div>
- 
+    <script src="script.js"></script>
+</body>
+</html>
