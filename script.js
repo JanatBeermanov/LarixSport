@@ -44,3 +44,24 @@
     document.getElementById('add-student-form').reset();
   });
 </script>
+
+// Функция для сортировки студентов
+function sortStudents(attribute) {
+  const studentsList = document.getElementById('students-list');
+  const students = Array.from(studentsList.getElementsByClassName('card'));
+  
+  students.sort((a, b) => {
+    const aValue = a.querySelector(`.${attribute}`).textContent;
+    const bValue = b.querySelector(`.${attribute}`).textContent;
+    return aValue.localeCompare(bValue);
+  });
+
+  students.forEach(student => {
+    studentsList.appendChild(student); // Перемещаем элементы в отсортированном порядке
+  });
+}
+
+// Слушатели событий для кнопок сортировки
+document.getElementById('sort-name').addEventListener('click', () => sortStudents('name'));
+document.getElementById('sort-age').addEventListener('click', () => sortStudents('age'));
+document.getElementById('sort-height').addEventListener('click', () => sortStudents('height'));
