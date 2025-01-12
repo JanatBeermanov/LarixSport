@@ -82,3 +82,35 @@ document.getElementById('filter-input').addEventListener('input', function() {
     }
   });
 });
+
+document.getElementById('add-student-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const name = document.getElementById('name').value;
+  const age = document.getElementById('age').value;
+  const height = document.getElementById('height').value;
+  const weight = document.getElementById('weight').value;
+  
+  const studentCard = document.createElement('div');
+  studentCard.classList.add('card');
+  
+  studentCard.innerHTML = `
+    <div class="card-content">
+      <h3 class="name">${name}</h3>
+      <p class="age">Возраст: ${age} лет</p>
+      <p class="height">Рост: ${height} см</p>
+      <p class="weight">Вес: ${weight} кг</p>
+      <button class="edit-btn">Редактировать</button>
+    </div>
+  `;
+
+  // Кнопка редактирования
+  const editButton = studentCard.querySelector('.edit-btn');
+  editButton.addEventListener('click', () => {
+    document.getElementById('name').value = name;
+    document.getElementById('age').value = age;
+    document.getElementById('height').value = height;
+    document.getElementById('weight').value = weight;
+  });
+
+  document.getElementById('students-list').appendChild(studentCard);
+});
